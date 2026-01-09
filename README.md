@@ -1,6 +1,3 @@
-# titanic-github-projekt
-Gruppenarbeit GitHub – Titanic Analyse in R
-
 # Titanic GitHub Projekt
 
 ## Inhalt
