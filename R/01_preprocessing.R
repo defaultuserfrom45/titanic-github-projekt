@@ -28,3 +28,12 @@ data_raw$Pclass <- factor(data_raw$Pclass, levels = c(1,2,3), ordered = TRUE)
 # Kurzer Check
 str(data_raw)
 summary(data_raw)
+
+
+# Fehlende Alterswerte imputieren (Median nach Anrede)
+
+median_age <- tapply(data_raw$Age, data_raw$Anrede, median, na.rm = TRUE)
+
+idx_na <- is.na(data_raw$Age)
+data_raw$Age[idx_na] <- median_age[data_raw$Anrede[idx_na]]
+
