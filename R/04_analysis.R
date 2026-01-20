@@ -1,3 +1,6 @@
+# Ziel: Bereinigten Datensatz laden und deskriptive Auswertungen erstellen
+# Output: Tabellen unter report/tables, Grafiken unter report/figures
+
 if (!dir.exists("report")) dir.create("report", recursive = TRUE)
 if (!dir.exists("report/figures")) dir.create("report/figures", recursive = TRUE)
 if (!dir.exists("report/tables")) dir.create("report/tables", recursive = TRUE)
