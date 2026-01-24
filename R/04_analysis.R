@@ -85,3 +85,51 @@ if ("Seite" %in% names(data)) {
   write.csv(tab_seite, "report/tables/tab_seite.csv", row.names = FALSE)
 }
 
+# 4) Grafiken 
+
+# A) Überleben nach Klasse
+if (all(c("Pclass","Survived") %in% names(data))) {
+  save_plot_png("report/figures/bar_survived_by_pclass.png", {
+    tab <- table(data$Pclass, data$Survived)
+    barplot(tab, beside = TRUE, legend = TRUE,
+            main = "Überleben nach Klasse",
+            xlab = "Klasse", ylab = "Häufigkeit")
+  })
+}
+
+# B) Überleben nach Geschlecht
+if (all(c("Sex","Survived") %in% names(data))) {
+  save_plot_png("report/figures/bar_survived_by_sex.png", {
+    tab <- table(data$Sex, data$Survived)
+    barplot(tab, beside = TRUE, legend = TRUE,
+            main = "Überleben nach Geschlecht",
+            xlab = "Geschlecht", ylab = "Häufigkeit")
+  })
+}
+
+# C) Boxplot Alter nach Überleben
+if (all(c("Age","Survived") %in% names(data))) {
+  save_plot_png("report/figures/box_age_by_survived.png", {
+    boxplot(Age ~ Survived, data = data,
+            main = "Alter nach Überleben",
+            xlab = "Überlebt", ylab = "Alter")
+  })
+}
+
+# D) Boxplot Fare nach Überleben
+if (all(c("Fare","Survived") %in% names(data))) {
+  save_plot_png("report/figures/box_fare_by_survived.png", {
+    boxplot(Fare ~ Survived, data = data,
+            main = "Ticketpreis nach Überleben",
+            xlab = "Überlebt", ylab = "Fare")
+  })
+}
+
+# E) Pflicht-Visualisierung 
+if (all(c("Survived","Sex","Pclass") %in% names(data))) {
+  save_plot_png("report/figures/viz_survived_sex_pclass.png", {
+    viz_kat_3(data, "Survived", "Sex", "Pclass")
+  })
+}
+
+cat("Analyse (Person A) abgeschlossen. Tabellen: report/tables, Grafiken: report/figures\n")
