@@ -1,6 +1,180 @@
 \documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage[ngerman]{babel}
 \usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{geometry}
+\usepackage{setspace}
+
+\geometry{left=3cm,right=3cm,top=3cm,bottom=3cm}
+\onehalfspacing
+\setlength{\parindent}{0pt}
+
+\title{Analyse des Titanic-Datensatzes}
+\author{Rit Alija \and Yasin Sabanoglu}
+\date{\today}
+
 \begin{document}
-Bericht folgt.
+\maketitle
+
+\section{Einleitung}
+
+Der Titanic-Datensatz ist ein häufig verwendeter Beispieldatensatz zur Einführung in
+Datenanalyse und Statistik. Er enthält Informationen über Passagiere der Titanic,
+unter anderem zu Geschlecht, Alter, Ticketklasse, Ticketpreis und Überlebensstatus.
+
+Ziel dieser Arbeit ist es, den Datensatz aufzubereiten, deskriptiv zu analysieren
+und erste Zusammenhänge zwischen ausgewählten Variablen zu untersuchen.
+
+\section{Datenaufbereitung}
+
+Die Rohdaten wurden zunächst bereinigt und für die Analyse vorbereitet.
+Dabei wurden unter anderem folgende Schritte durchgeführt:
+
+\begin{itemize}
+  \item Extraktion und Vereinheitlichung der Anrede aus dem Namen
+  \item Umkodierung geeigneter Variablen in Faktoren
+  \item Imputation fehlender Alterswerte anhand des Medianalters pro Anrede
+  \item Aufbereitung der Kabineninformation (Deck und Seite)
+  \item Entfernen nicht benötigter Variablen
+\end{itemize}
+
+Der bereinigte Datensatz wurde anschließend als neue CSV-Datei gespeichert und
+diente als Grundlage für alle weiteren Analysen.
+
+\section{Deskriptive Analyse}
+
+\subsection{Metrische Variablen}
+
+Tabelle~\ref{tab:age} zeigt die deskriptiven Kennzahlen für das Alter der Passagiere.
+
+\begin{table}[H]
+\centering
+\caption{Deskriptive Statistik des Alters}
+\label{tab:age}
+\begin{tabular}{lr}
+\toprule
+Kennzahl & Wert \\
+\midrule
+Anzahl & 891 \\
+Mittelwert & 29.7 \\
+Median & 28.0 \\
+Standardabweichung & 14.5 \\
+Minimum & 0.4 \\
+Maximum & 80.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Tabelle~\ref{tab:fare} zeigt die deskriptiven Kennzahlen für den Ticketpreis.
+
+\begin{table}[H]
+\centering
+\caption{Deskriptive Statistik des Ticketpreises}
+\label{tab:fare}
+\begin{tabular}{lr}
+\toprule
+Kennzahl & Wert \\
+\midrule
+Anzahl & 891 \\
+Mittelwert & 32.2 \\
+Median & 14.5 \\
+Standardabweichung & 49.7 \\
+Minimum & 0.0 \\
+Maximum & 512.3 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Kategoriale Variablen}
+
+Tabelle~\ref{tab:survived} zeigt die Verteilung des Überlebensstatus.
+
+\begin{table}[H]
+\centering
+\caption{Überlebensstatus der Passagiere}
+\label{tab:survived}
+\begin{tabular}{lrr}
+\toprule
+Status & Häufigkeit & Anteil \\
+\midrule
+Ja & 342 & 0.384 \\
+Nein & 549 & 0.616 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Bivariate Analyse}
+
+Abbildung~\ref{fig:pclass} zeigt die Überlebenshäufigkeit in Abhängigkeit von der Ticketklasse.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/bar_survived_by_pclass.png}
+\caption{Überleben nach Ticketklasse}
+\label{fig:pclass}
+\end{figure}
+
+Abbildung~\ref{fig:sex} zeigt den Zusammenhang zwischen Geschlecht und Überlebensstatus.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/bar_survived_by_sex.png}
+\caption{Überleben nach Geschlecht}
+\label{fig:sex}
+\end{figure}
+
+Abbildung~\ref{fig:embarked} zeigt den Überlebensstatus nach Einschiffungshafen.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/bar_survived_by_embarked.png}
+\caption{Überleben nach Einschiffungshafen}
+\label{fig:embarked}
+\end{figure}
+
+Abbildung~\ref{fig:agebox} zeigt die Altersverteilung getrennt nach Überlebensstatus.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/box_age_by_survived.png}
+\caption{Alter nach Überlebensstatus}
+\label{fig:agebox}
+\end{figure}
+
+Abbildung~\ref{fig:farebox} zeigt die Verteilung der Ticketpreise nach Überlebensstatus.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/box_fare_by_survived.png}
+\caption{Ticketpreis nach Überlebensstatus}
+\label{fig:farebox}
+\end{figure}
+
+Abbildung~\ref{fig:triple} zeigt die gemeinsame Verteilung von Überlebensstatus,
+Geschlecht und Ticketklasse.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/viz_survived_sex_pclass.png}
+\caption{Überleben nach Geschlecht und Ticketklasse}
+\label{fig:triple}
+\end{figure}
+
+\section{Diskussion}
+
+Die Ergebnisse zeigen deutliche Unterschiede in den Überlebenswahrscheinlichkeiten
+zwischen verschiedenen Gruppen. Insbesondere weibliche Passagiere sowie Passagiere
+höherer Klassen hatten eine deutlich höhere Überlebenschance.
+Auch der Ticketpreis unterscheidet sich klar zwischen Überlebenden und Nicht-Überlebenden.
+
+\section{Fazit}
+
+In dieser Arbeit wurde der Titanic-Datensatz erfolgreich aufbereitet und analysiert.
+Die Ergebnisse verdeutlichen bekannte Muster und zeigen den Nutzen strukturierter
+Datenanalyse anhand eines realitätsnahen Beispiels.
+
 \end{document}
